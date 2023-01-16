@@ -16,32 +16,10 @@
             $titre = $_POST['titre'];
             $res = $_POST['res'];
             $duree = $_POST['duree'];
-            $ligne = 0;
-            $i=0;
-            $ficFilmsRead = fopen("donnees/films.txt","r");
-            $ligneRead = fgets($ficFilmsRead);
-            while(!feof($ficFilmsRead)){
-                $tab = explode(";", $ligneRead);
-                if($tab[0]==$titre){
-                    $ligne=$i;
-                    break;
-                }
-                $i= $i+1;
-                $ligneRead = fgets($ficFilmsRead);
-            }    
-            fclose($ficFilmsRead);
- 
-            $file_content = file("donnees/films.txt");
-
-            $file_content[$ligne] = $titre.";".$res.";".$duree."\n";
-
-            $fh = fopen("donnees/films.txt","w");
-            foreach($file_content as $line)
-            {
-            fputs($fh, $line);
-            }
-            fclose($fh);
-
+            $query = "INSERT INTO films(idf,titre,duree,realisateur) VALUES(0,'$titre',$duree,'$res')";
+            mysqli_query($con,$query);
+            mysqli_close($con);
+            echo "Film ".$titre." a été bien enregistré";
             echo "Film ".$titre.$res.$duree." a été bien modifié";
         ?>
     <br>

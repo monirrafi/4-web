@@ -1,4 +1,3 @@
 Titanic1;James Cameroun;110
 Titanic;James Cameroun;100
 Titanic2;James Cameroun;120
-Titanic1 un;pierre olsen;100

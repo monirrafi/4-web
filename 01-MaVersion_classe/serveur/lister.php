@@ -1,3 +1,8 @@
+<?php
+ require_once('includes/donnees.inc.php');
+ require_once('includes/utilitaires.inc.php');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,13 +18,8 @@
 </head>
 </body>
   <div class="container">
-
     <?php
-        $ficFilms = fopen("donnees/films.txt","r");
-
         $rep = <<<REPONSE
-        <Center>
-        <h2> Liste des films </h2>
         <div class="table-responsive">
             <table class="table table-dark table-striped table-sm align-middle">
                 <thead>
@@ -31,21 +31,21 @@
                 </thead>
                 <tbody>
         REPONSE;
-
-        $ligne = fgets($ficFilms);
-        while(!feof($ficFilms)){
-            $tab = explode(";", $ligne);
+        global $films;
+        $liste = $films->getFilms();
+        foreach($liste as $tab){
+            $titre = $tab->getTitre();
+            $res = $tab->getRes();
+            $duree = $tab->getDuree();
             $rep .= <<<SUITE_REPONSE
                 <tr>
-                    <td>$tab[0]</td>
-                    <td>$tab[1]</td>
-                    <td>$tab[2]</td>
+                    <td>$titre</td>
+                    <td>$res</td>
+                    <td>$duree</td>
                 </tr>
             SUITE_REPONSE;
-            $ligne = fgets($ficFilms);
         }
-        $rep .= "</Center></tbody></table>";
-        fclose($ficFilms);
+        $rep .= "</tbody></table>";
         echo $rep;
     ?>
     <br> <a href="../index.html">Retour à la page d'accueil</a> 

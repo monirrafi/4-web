@@ -11,13 +11,13 @@
     <script src="../client/js/global.js"></script>
 </head>
 <body>
-    <h2>MODIFICATION D'UN FILM</h2> 
-        <?php
-            $titre = $_POST['titre'];
-            $res = $_POST['res'];
-            $duree = $_POST['duree'];
+    <h2>SUPRESSION D'UN FILM</h2> 
+<?php
+        $titre = $_POST['titre'];
+        if(array_key_exists('btnOui', $_POST)) {
             $ligne = 0;
             $i=0;
+
             $ficFilmsRead = fopen("donnees/films.txt","r");
             $ligneRead = fgets($ficFilmsRead);
             while(!feof($ficFilmsRead)){
@@ -30,20 +30,23 @@
                 $ligneRead = fgets($ficFilmsRead);
             }    
             fclose($ficFilmsRead);
- 
+
             $file_content = file("donnees/films.txt");
-
-            $file_content[$ligne] = $titre.";".$res.";".$duree."\n";
-
+            unset($file_content[$ligne]); /* On supprime la ligne par exemple */
             $fh = fopen("donnees/films.txt","w");
             foreach($file_content as $line)
             {
             fputs($fh, $line);
             }
             fclose($fh);
+            echo "Film ".$titre." a été bien suprimé";
+        }
+        else if(array_key_exists('btnNon', $_POST)) {
+            echo "Film ".$titre." n'a pas été bien suprimé";
+        }
 
-            echo "Film ".$titre.$res.$duree." a été bien modifié";
-        ?>
+?>
+
     <br>
     <a href="../index.html">Retour à la page d'accueil</a> 
 </body>
