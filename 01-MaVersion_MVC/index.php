@@ -1,3 +1,8 @@
+<?php
+  $titre = filter_input(INPUT_POST,'titre', FILTER_SANITIZE_STRING);
+  $res = filter_input(INPUT_POST,'res', FILTER_SANITIZE_STRING);
+  $duree = filter_input(INPUT_POST,'duree', FILTER_SANITIZE_STRING);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,7 +30,7 @@
                 <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#modalEnregistrer">Enregistrer</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="javascript:lister();">Lister</a>
+                <a class="nav-link active" aria-current="page" href="client/view/lister.php">Lister</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#modalModif">Modifier</a>
@@ -33,6 +38,7 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#"  data-bs-toggle="modal" data-bs-target="#modalSuprimer">Suprimer</a>
               </li>
+
             </ul>
           </div>
         </div>
@@ -48,7 +54,7 @@
             </div>
             <div class="modal-body">
                 <span id="msgErr"></span>
-                <form class="row g-3" action="serveur/enregistrer.php" method="POST" onSubmit="return validerForm();">
+                <form class="row g-3" action="client/view/enregistrer.php" method="POST">
                     <div class="col-md-12">
                         <label for="titre" class="form-label">Titre</label>
                         <input type="text" class="form-control is-valid" id="titre" name="titre" required>
@@ -73,8 +79,8 @@
         </div>
         </div>
     </div>
-    <!--form de lister-->
-    <form id="formLister" action="serveur/lister.php"  method="POST"></form>
+    <!--form de lister
+    <form id="formLister" action=""  method="POST"></form>-->
     <!--form de modifier-->
     <div class="modal fade" id="modalModif" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -85,10 +91,10 @@
             </div>
             <div class="modal-body">
                 <span id="msgErrModif"></span>
-                <form class="row g-3" action="serveur/afficherForm.php" method="POST"  onSubmit="return form();">
+                <form class="row g-3" action="client/view/afficherForm.php" method="POST">
                     <div class="col-md-12">
-                        <label for="titre" class="form-label">Titre</label>
-                        <input type="text" class="form-control is-valid" id="titre" name="titre" required>
+                        <label for="id" class="form-label">Numero du livre</label>
+                        <input type="text" class="form-control is-valid" id="id" name="id" required>
                         <input type="hidden" id="sort" name="sort" value="modifier">    
                     </div>
                     <br/>
@@ -113,10 +119,10 @@
             </div>
             <div class="modal-body">
                 <span id="msgErrModif"></span>
-                <form class="row g-3" action="serveur/afficherForm.php" method="POST"  onSubmit="return form();">
+                <form class="row g-3" action="client/view/afficherForm.php" method="POST">
                     <div class="col-md-12">
-                        <label for="titre" class="form-label">Titre</label>
-                        <input type="text" class="form-control is-valid" id="titre" name="titre" required>
+                        <label for="id" class="form-label">Numero du livre</label>
+                        <input type="text" class="form-control is-valid" id="id" name="id" required>
                         <input type="hidden" id="sort" name="sort" value="suprimer">    
                     </div>
                     <br/>
@@ -131,6 +137,5 @@
         </div>
         </div>
     </div>
-
-</body>
+    </body>
 </html>
